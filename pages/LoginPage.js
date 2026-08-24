@@ -67,6 +67,44 @@ class LoginPage {
     }
   }
 
+  async handleDeviceLimitPopup() {
+    // If user is logged in on more than 2 devices, a "Device Limit Reached" popup appears.
+    // We need to logout non-current devices until the popup goes away.
+    try {
+      const deviceLimitHeading = this.page.locator('text=Device Limit Reached');
+      await deviceLimitHeading.waitFor({ state: 'visible', timeout: 5000 });
+
+      // Keep logging out non-current devices until popup disappears
+      while (await deviceLimitHeading.isVisible()) {
+        // Find a Logout button that is NOT for the (Current) device
+        const logoutButtons = this.page.locator('button:has-text("Logout")');
+        const count = await logoutButtons.count();
+
+        let loggedOut = false;
+        for (let i = 0; i < count; i++) {
+          // Get the parent device card text to check if it's not "Current"
+          const deviceCard = logoutButtons.nth(i).locator('..');
+          const cardText = await deviceCard.textContent();
+          if (!cardText.includes('(Current)')) {
+            await logoutButtons.nth(i).click();
+            loggedOut = true;
+            // Wait for popup to either refresh or disappear
+            await this.page.waitForTimeout(2000);
+            break;
+          }
+        }
+
+        if (!loggedOut) break; // No non-current device found, exit loop
+
+        // Check if popup is still visible
+        const stillVisible = await deviceLimitHeading.isVisible().catch(() => false);
+        if (!stillVisible) break;
+      }
+    } catch {
+      // Device limit popup didn't appear, continue
+    }
+  }
+
   async waitForSuccessfulLogin() {
     // After correct OTP, user is auto-redirected to homepage
     await this.page.waitForURL('**/');
@@ -94,6 +132,7 @@ class LoginPage {
     await this.clickClaimButton();
     await this.waitForOTPScreen();
     await this.enterOTP(otp);
+    await this.handleDeviceLimitPopup();
     await this.waitForSuccessfulLogin();
   }
 }
