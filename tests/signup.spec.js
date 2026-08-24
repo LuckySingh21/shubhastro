@@ -66,7 +66,7 @@ test.describe('Signup Flow', () => {
   test('should complete full signup and land on dashboard', async ({ page }) => {
     await allure.suite('Signup');
     await allure.severity('blocker');
-    await allure.description('Verify the complete signup flow: phone → OTP → step 1 → step 2 → dashboard');
+    await allure.description('Verify the complete signup flow: phone → OTP → step 1 → step 2 → step 3 → dashboard');
 
     const loginPage = new LoginPage(page);
     const signupPage = new SignupPage(page);
@@ -88,6 +88,7 @@ test.describe('Signup Flow', () => {
       dob: '21121996',
       birthTime: '1123A',
       placeOfBirth: 'mumbai',
+      interests: ['Tarot', 'Vedic Astrology'],
     });
 
     // Verify user is on dashboard
@@ -119,6 +120,7 @@ test.describe('Signup Flow', () => {
       dob: '15061990',
       birthTime: '0930P',
       placeOfBirth: 'delhi',
+      interests: ['Numerology', 'Palmistry'],
     });
 
     const helloText = await page.locator('text=Hello,').first().textContent();
@@ -149,6 +151,7 @@ test.describe('Signup Flow', () => {
       dob: '01011985',
       birthTime: null, // Will check "Don't know" checkbox
       placeOfBirth: 'pune',
+      interests: [], // Skip interest selection
     });
 
     const helloText = await page.locator('text=Hello,').first().textContent();

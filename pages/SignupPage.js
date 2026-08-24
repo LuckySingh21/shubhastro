@@ -18,6 +18,9 @@ class SignupPage {
     this.dontKnowTimeCheckbox = page.locator('text=Don\'t know the exact time of birth');
     this.placeOfBirthInput = page.locator('input[placeholder="Select here"]');
 
+    // Step 3 elements - Interest selection
+    this.step3Heading = page.locator('text=What brings you here today?');
+
     // Loading screen
     this.loadingText = page.locator('text=The cosmos is aligning for you');
 
@@ -111,6 +114,26 @@ class SignupPage {
     await this.clickNext();
   }
 
+  // Step 3 - Interest selection
+  async waitForStep3() {
+    await this.step3Heading.waitFor({ state: 'visible', timeout: 10000 });
+  }
+
+  async selectInterests(interests) {
+    // interests is an array of category names, e.g. ['Tarot', 'Vedic Astrology']
+    for (const interest of interests) {
+      await this.page.locator(`text=${interest}`).click();
+    }
+  }
+
+  async completeStep3(interests = []) {
+    await this.waitForStep3();
+    if (interests.length > 0) {
+      await this.selectInterests(interests);
+    }
+    await this.clickNext();
+  }
+
   async waitForRegistrationComplete() {
     // Wait for loading screen to appear and then redirect to homepage
     try {
@@ -124,9 +147,10 @@ class SignupPage {
   }
 
   // Full signup flow
-  async completeSignup({ name, email, gender, dob, birthTime, placeOfBirth }) {
+  async completeSignup({ name, email, gender, dob, birthTime, placeOfBirth, interests = [] }) {
     await this.completeStep1(name, email, gender);
     await this.completeStep2(dob, birthTime, placeOfBirth);
+    await this.completeStep3(interests);
     await this.waitForRegistrationComplete();
   }
 }
