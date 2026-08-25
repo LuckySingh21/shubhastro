@@ -1,3 +1,5 @@
+const { TIMEOUTS } = require('../utils/constants');
+
 class SignupPage {
   constructor(page) {
     this.page = page;
@@ -30,7 +32,7 @@ class SignupPage {
   }
 
   async waitForStep1() {
-    await this.step1Heading.waitFor({ state: 'visible', timeout: 10000 });
+    await this.step1Heading.waitFor({ state: 'visible', timeout: TIMEOUTS.LONG });
   }
 
   async enterName(name) {
@@ -71,7 +73,7 @@ class SignupPage {
   }
 
   async waitForStep2() {
-    await this.step2Heading.waitFor({ state: 'visible', timeout: 10000 });
+    await this.step2Heading.waitFor({ state: 'visible', timeout: TIMEOUTS.LONG });
   }
 
   async enterDOB(dob) {
@@ -95,10 +97,10 @@ class SignupPage {
     await this.placeOfBirthInput.fill(place);
     // Wait for autocomplete suggestions and click the first one
     const firstSuggestion = this.page.locator(`text=${place}`).first();
-    await firstSuggestion.waitFor({ state: 'visible', timeout: 5000 });
+    await firstSuggestion.waitFor({ state: 'visible', timeout: TIMEOUTS.MEDIUM });
     // Click the first suggestion from the dropdown (not the input itself)
     const suggestionItem = this.page.locator(`text=${place}, `).first();
-    await suggestionItem.waitFor({ state: 'visible', timeout: 5000 });
+    await suggestionItem.waitFor({ state: 'visible', timeout: TIMEOUTS.MEDIUM });
     await suggestionItem.click();
   }
 
@@ -116,7 +118,7 @@ class SignupPage {
 
   // Step 3 - Interest selection
   async waitForStep3() {
-    await this.step3Heading.waitFor({ state: 'visible', timeout: 10000 });
+    await this.step3Heading.waitFor({ state: 'visible', timeout: TIMEOUTS.LONG });
   }
 
   async selectInterests(interests) {
@@ -137,13 +139,13 @@ class SignupPage {
   async waitForRegistrationComplete() {
     // Wait for loading screen to appear and then redirect to homepage
     try {
-      await this.loadingText.waitFor({ state: 'visible', timeout: 10000 });
+      await this.loadingText.waitFor({ state: 'visible', timeout: TIMEOUTS.LONG });
     } catch {
       // Loading might be too fast to catch
     }
     // Wait for redirect to homepage
-    await this.page.waitForURL('**/session.shubhastro.ai', { timeout: 30000 }).catch(() => {});
-    await this.page.locator('text=Hello,').first().waitFor({ state: 'visible', timeout: 30000 });
+    await this.page.waitForURL('**/session.shubhastro.ai', { timeout: TIMEOUTS.MAX }).catch(() => {});
+    await this.page.locator('text=Hello,').first().waitFor({ state: 'visible', timeout: TIMEOUTS.MAX });
   }
 
   // Full signup flow

@@ -1,3 +1,5 @@
+const { TIMEOUTS } = require('../utils/constants');
+
 class LoginPage {
   constructor(page) {
     this.page = page;
@@ -22,11 +24,11 @@ class LoginPage {
   async dismissPopupIfVisible() {
     try {
       const popup = this.page.locator('text=Unlock Your Free Kundli');
-      await popup.waitFor({ state: 'visible', timeout: 5000 });
+      await popup.waitFor({ state: 'visible', timeout: TIMEOUTS.MEDIUM });
       // Click the X close button on the popup
       const closeBtn = this.page.locator('button[aria-label="Close"]');
       await closeBtn.click();
-      await popup.waitFor({ state: 'hidden', timeout: 3000 });
+      await popup.waitFor({ state: 'hidden', timeout: TIMEOUTS.SHORT });
     } catch {
       // Popup didn't appear, continue
     }
@@ -53,7 +55,7 @@ class LoginPage {
   }
 
   async waitForOTPScreen() {
-    await this.otpHeading.waitFor({ state: 'visible', timeout: 10000 });
+    await this.otpHeading.waitFor({ state: 'visible', timeout: TIMEOUTS.LONG });
   }
 
   async enterOTP(otp) {
@@ -72,7 +74,7 @@ class LoginPage {
     // We need to logout non-current devices until the popup goes away.
     try {
       const deviceLimitHeading = this.page.locator('text=Device Limit Reached');
-      await deviceLimitHeading.waitFor({ state: 'visible', timeout: 5000 });
+      await deviceLimitHeading.waitFor({ state: 'visible', timeout: TIMEOUTS.MEDIUM });
 
       // Keep logging out non-current devices until popup disappears
       while (await deviceLimitHeading.isVisible()) {
@@ -108,7 +110,7 @@ class LoginPage {
   async waitForSuccessfulLogin() {
     // After correct OTP, user is auto-redirected to homepage
     await this.page.waitForURL('**/');
-    await this.page.locator('text=Hello,').first().waitFor({ state: 'visible', timeout: 15000 });
+    await this.page.locator('text=Hello,').first().waitFor({ state: 'visible', timeout: TIMEOUTS.EXTRA_LONG });
   }
 
   async isLoggedIn() {

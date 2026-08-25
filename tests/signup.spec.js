@@ -2,12 +2,17 @@ const { test, expect } = require('@playwright/test');
 const { allure } = require('allure-playwright');
 const LoginPage = require('../pages/LoginPage');
 const SignupPage = require('../pages/SignupPage');
+const db = require('../utils/db');
 const { generateRandomPhone, generateRandomName, generateRandomEmail } = require('../utils/helpers');
 require('dotenv').config();
 
 const TEST_OTP = process.env.TEST_OTP;
 
 test.describe('Signup Flow', () => {
+
+  test.afterAll(async () => {
+    await db.close();
+  });
 
   test('should show step 1 form after new user enters OTP', async ({ page }) => {
     await allure.suite('Signup');
@@ -63,15 +68,16 @@ test.describe('Signup Flow', () => {
     await expect(signupPage.placeOfBirthInput).toBeVisible();
   });
 
-  test('should complete full signup and land on dashboard', async ({ page }) => {
+  test('should complete full signup and verify in DB', async ({ page }) => {
     await allure.suite('Signup');
     await allure.severity('blocker');
-    await allure.description('Verify the complete signup flow: phone → OTP → step 1 → step 2 → step 3 → dashboard');
+    await allure.description('Verify complete signup flow and confirm user data is correctly saved in MongoDB');
 
     const loginPage = new LoginPage(page);
     const signupPage = new SignupPage(page);
     const phone = generateRandomPhone();
     const name = generateRandomName();
+    const email = generateRandomEmail(name);
 
     await loginPage.navigateToHomepage();
     await loginPage.clickSignIn();
@@ -83,7 +89,7 @@ test.describe('Signup Flow', () => {
     // Complete full signup
     await signupPage.completeSignup({
       name: name,
-      email: generateRandomEmail(name),
+      email: email,
       gender: 'male',
       dob: '21121996',
       birthTime: '1123A',
@@ -91,15 +97,29 @@ test.describe('Signup Flow', () => {
       interests: ['Tarot', 'Vedic Astrology'],
     });
 
-    // Verify user is on dashboard
+    // UI verification
     const helloText = await page.locator('text=Hello,').first().textContent();
     expect(helloText).not.toContain('Guest');
+
+    // DB verification
+    const user = await db.findUserByPhone(phone);
+    expect(user).not.toBeNull();
+    expect(user.isRegister).toBe(true);
+    expect(user.isVerified).toBe(true);
+    expect(user.gender).toBe('male');
+    expect(user.phoneNumber).toBe(`91${phone}`);
+
+    // Verify ₹250 signup bonus credited to wallet
+    const wallet = await db.getUserWalletByUserId(user._id);
+    expect(wallet).not.toBeNull();
+    expect(wallet.amount).toBeGreaterThanOrEqual(250);
+    expect(wallet.lifetime_credit).toBeGreaterThanOrEqual(250);
   });
 
-  test('should complete signup with female gender', async ({ page }) => {
+  test('should complete signup with female gender and verify in DB', async ({ page }) => {
     await allure.suite('Signup');
     await allure.severity('normal');
-    await allure.description('Verify signup works with female gender selection');
+    await allure.description('Verify signup works with female gender and data is correctly stored in DB');
 
     const loginPage = new LoginPage(page);
     const signupPage = new SignupPage(page);
@@ -123,14 +143,20 @@ test.describe('Signup Flow', () => {
       interests: ['Numerology', 'Palmistry'],
     });
 
+    // UI verification
     const helloText = await page.locator('text=Hello,').first().textContent();
     expect(helloText).not.toContain('Guest');
+
+    // DB verification
+    const user = await db.findUserByPhone(phone);
+    expect(user).not.toBeNull();
+    expect(user.gender).toBe('female');
   });
 
-  test('should complete signup without birth time', async ({ page }) => {
+  test('should complete signup without birth time and verify in DB', async ({ page }) => {
     await allure.suite('Signup');
     await allure.severity('normal');
-    await allure.description('Verify signup works when user checks "Don\'t know the exact time of birth"');
+    await allure.description('Verify signup works without birth time and data is correctly stored in DB');
 
     const loginPage = new LoginPage(page);
     const signupPage = new SignupPage(page);
@@ -149,13 +175,19 @@ test.describe('Signup Flow', () => {
       email: null,
       gender: 'others',
       dob: '01011985',
-      birthTime: null, // Will check "Don't know" checkbox
+      birthTime: null,
       placeOfBirth: 'pune',
-      interests: [], // Skip interest selection
+      interests: [],
     });
 
+    // UI verification
     const helloText = await page.locator('text=Hello,').first().textContent();
     expect(helloText).not.toContain('Guest');
+
+    // DB verification
+    const user = await db.findUserByPhone(phone);
+    expect(user).not.toBeNull();
+    expect(user.isRegister).toBe(true);
   });
 
 });

@@ -1,3 +1,5 @@
+const { TIMEOUTS } = require('../utils/constants');
+
 class ProfilePage {
   constructor(page) {
     this.page = page;
@@ -43,18 +45,18 @@ class ProfilePage {
   }
 
   async waitForSelectProfilePopup() {
-    await this.selectProfileHeading.waitFor({ state: 'visible', timeout: 10000 });
+    await this.selectProfileHeading.waitFor({ state: 'visible', timeout: TIMEOUTS.LONG });
   }
 
   async clickEditProfile() {
     // Click the edit (pencil) icon on the profile card
     const editIcon = this.page.locator('svg[class*="edit"], [class*="edit"] svg, button[class*="edit"]').first();
     await editIcon.click();
-    await this.editProfileHeading.waitFor({ state: 'visible', timeout: 10000 });
+    await this.editProfileHeading.waitFor({ state: 'visible', timeout: TIMEOUTS.LONG });
   }
 
   async waitForEditProfileModal() {
-    await this.editProfileHeading.waitFor({ state: 'visible', timeout: 10000 });
+    await this.editProfileHeading.waitFor({ state: 'visible', timeout: TIMEOUTS.LONG });
   }
 
   async editName(newName) {
@@ -102,7 +104,7 @@ class ProfilePage {
     await placeField.fill(place);
     // Wait for autocomplete and click first suggestion
     const suggestionItem = this.page.locator(`text=${place}, `).first();
-    await suggestionItem.waitFor({ state: 'visible', timeout: 5000 });
+    await suggestionItem.waitFor({ state: 'visible', timeout: TIMEOUTS.MEDIUM });
     await suggestionItem.click();
   }
 
@@ -111,7 +113,7 @@ class ProfilePage {
   }
 
   async verifyProfileUpdatedSuccessfully() {
-    await this.successToast.waitFor({ state: 'visible', timeout: 10000 });
+    await this.successToast.waitFor({ state: 'visible', timeout: TIMEOUTS.LONG });
   }
 
   // Full flow: open dropdown → manage profile → edit → save
