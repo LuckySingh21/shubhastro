@@ -190,4 +190,135 @@ test.describe('Signup Flow', () => {
     expect(user.isRegister).toBe(true);
   });
 
+  // --- Negative Test Cases ---
+
+  test('should show error for empty name on step 1', async ({ page }) => {
+    await allure.suite('Signup');
+    await allure.severity('critical');
+    await allure.description('Verify error toast when name is empty and Next is clicked');
+
+    const loginPage = new LoginPage(page);
+    const signupPage = new SignupPage(page);
+    const phone = generateRandomPhone();
+
+    await loginPage.navigateToHomepage();
+    await loginPage.clickSignIn();
+    await loginPage.enterMobileNumber(phone);
+    await loginPage.clickClaimButton();
+    await loginPage.waitForOTPScreen();
+    await loginPage.enterOTP(TEST_OTP);
+
+    await signupPage.waitForStep1();
+    // Click Next without entering name
+    await signupPage.nextButton.click({ force: true });
+
+    const errorToast = page.locator('text=Please enter your name');
+    await expect(errorToast).toBeVisible();
+  });
+
+  test('should show error for name less than 3 characters', async ({ page }) => {
+    await allure.suite('Signup');
+    await allure.severity('critical');
+    await allure.description('Verify error toast when name has less than 3 characters');
+
+    const loginPage = new LoginPage(page);
+    const signupPage = new SignupPage(page);
+    const phone = generateRandomPhone();
+
+    await loginPage.navigateToHomepage();
+    await loginPage.clickSignIn();
+    await loginPage.enterMobileNumber(phone);
+    await loginPage.clickClaimButton();
+    await loginPage.waitForOTPScreen();
+    await loginPage.enterOTP(TEST_OTP);
+
+    await signupPage.waitForStep1();
+    await signupPage.enterName('ab');
+    await signupPage.nextButton.click({ force: true });
+
+    const errorToast = page.locator('[role="status"]').filter({ hasText: 'Name must be at least 3 characters' });
+    await expect(errorToast).toBeVisible();
+  });
+
+  test('should show error for name with numbers', async ({ page }) => {
+    await allure.suite('Signup');
+    await allure.severity('normal');
+    await allure.description('Verify error toast when name contains numbers or special characters');
+
+    const loginPage = new LoginPage(page);
+    const signupPage = new SignupPage(page);
+    const phone = generateRandomPhone();
+
+    await loginPage.navigateToHomepage();
+    await loginPage.clickSignIn();
+    await loginPage.enterMobileNumber(phone);
+    await loginPage.clickClaimButton();
+    await loginPage.waitForOTPScreen();
+    await loginPage.enterOTP(TEST_OTP);
+
+    await signupPage.waitForStep1();
+    await signupPage.enterName('123124131');
+    await signupPage.nextButton.click({ force: true });
+
+    const errorToast = page.locator('[role="status"]').filter({ hasText: /Please enter a valid name/ });
+    await expect(errorToast).toBeVisible();
+  });
+
+  test('should show error for empty DOB on step 2', async ({ page }) => {
+    await allure.suite('Signup');
+    await allure.severity('critical');
+    await allure.description('Verify error toast when DOB is empty and Next is clicked on step 2');
+
+    const loginPage = new LoginPage(page);
+    const signupPage = new SignupPage(page);
+    const phone = generateRandomPhone();
+    const name = generateRandomName();
+
+    await loginPage.navigateToHomepage();
+    await loginPage.clickSignIn();
+    await loginPage.enterMobileNumber(phone);
+    await loginPage.clickClaimButton();
+    await loginPage.waitForOTPScreen();
+    await loginPage.enterOTP(TEST_OTP);
+
+    // Complete step 1
+    await signupPage.completeStep1(name, null, 'male');
+
+    // On step 2, click Next without entering DOB
+    await signupPage.waitForStep2();
+    await signupPage.nextButton.click({ force: true });
+
+    const errorToast = page.locator('text=Please select your date of birth');
+    await expect(errorToast).toBeVisible();
+  });
+
+  test('should show error for empty place of birth on step 2', async ({ page }) => {
+    await allure.suite('Signup');
+    await allure.severity('critical');
+    await allure.description('Verify error toast when place of birth is empty and Next is clicked on step 2');
+
+    const loginPage = new LoginPage(page);
+    const signupPage = new SignupPage(page);
+    const phone = generateRandomPhone();
+    const name = generateRandomName();
+
+    await loginPage.navigateToHomepage();
+    await loginPage.clickSignIn();
+    await loginPage.enterMobileNumber(phone);
+    await loginPage.clickClaimButton();
+    await loginPage.waitForOTPScreen();
+    await loginPage.enterOTP(TEST_OTP);
+
+    // Complete step 1
+    await signupPage.completeStep1(name, null, 'male');
+
+    // On step 2, enter DOB but skip place of birth
+    await signupPage.waitForStep2();
+    await signupPage.enterDOB('26022008');
+    await signupPage.nextButton.click({ force: true });
+
+    const errorToast = page.locator('text=Please enter your place of birth');
+    await expect(errorToast).toBeVisible();
+  });
+
 });

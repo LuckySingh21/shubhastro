@@ -134,6 +134,43 @@ test.describe('User Profile Management', () => {
     expect(user.isAccountActive).toBe(true);
   });
 
+  // --- Negative Test Cases ---
+
+  test('should show error when saving profile with empty name', async ({ page }) => {
+    await allure.suite('Profile');
+    await allure.severity('critical');
+    await allure.description('Verify inline error appears when saving profile with empty name');
+
+    const profilePage = new ProfilePage(page);
+    await profilePage.openEditProfile();
+
+    // Clear name field
+    await profilePage.editName('');
+    await profilePage.clickSaveProfile();
+
+    // Verify inline error
+    const inlineError = page.locator('text=Name is required');
+    await expect(inlineError).toBeVisible();
+  });
+
+  test('should not update profile in DB when name is empty', async ({ page }) => {
+    await allure.suite('Profile');
+    await allure.severity('critical');
+    await allure.description('Verify that DB still has original name when save fails due to empty name');
+
+    const profilePage = new ProfilePage(page);
+    await profilePage.openEditProfile();
+
+    // Clear name and try to save
+    await profilePage.editName('');
+    await profilePage.clickSaveProfile();
+
+    // DB verification - name should still be original
+    const user = await db.findUserByPhone(TEST_PHONE);
+    expect(user).not.toBeNull();
+    expect(user.fullName || `${user.firstName} ${user.lastName}`.trim()).toBe(ORIGINAL_NAME);
+  });
+
   test('should logout successfully', async ({ page }) => {
     await allure.suite('Profile');
     await allure.severity('blocker');

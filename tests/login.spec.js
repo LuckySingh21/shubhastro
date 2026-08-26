@@ -7,11 +7,13 @@ require('dotenv').config();
 const TEST_PHONE = process.env.TEST_USER_PHONE;
 const TEST_OTP = process.env.TEST_OTP;
 
-test.describe('Login / Signup Flow', () => {
+test.describe('Login Flow', () => {
 
   test.afterAll(async () => {
     await db.close();
   });
+
+  // --- Positive Test Cases ---
 
   test('should navigate to login page when clicking Sign In', async ({ page }) => {
     await allure.suite('Login');
@@ -83,26 +85,6 @@ test.describe('Login / Signup Flow', () => {
     expect(now - lastLoginTime).toBeLessThan(fiveMinutes);
   });
 
-  test('should reset OTP fields on incorrect OTP', async ({ page }) => {
-    await allure.suite('Login');
-    await allure.severity('normal');
-    await allure.description('Verify that entering an incorrect OTP resets the input fields');
-
-    const loginPage = new LoginPage(page);
-    await loginPage.navigateToHomepage();
-    await loginPage.clickSignIn();
-    await loginPage.enterMobileNumber(TEST_PHONE);
-    await loginPage.clickClaimButton();
-    await loginPage.waitForOTPScreen();
-
-    // Enter wrong OTP
-    await loginPage.enterOTP('999999');
-
-    // Wait for fields to reset (stay on same page)
-    await page.waitForTimeout(3000);
-    await expect(page).toHaveURL(/.*\/login/);
-  });
-
   test('should show skip option on login page', async ({ page }) => {
     await allure.suite('Login');
     await allure.severity('minor');
@@ -113,6 +95,74 @@ test.describe('Login / Signup Flow', () => {
     await loginPage.clickSignIn();
 
     await expect(loginPage.skipButton).toBeVisible();
+  });
+
+  // --- Negative Test Cases ---
+
+  test('should show error for empty mobile number', async ({ page }) => {
+    await allure.suite('Login');
+    await allure.severity('critical');
+    await allure.description('Verify error toast appears when clicking Claim with empty phone number');
+
+    const loginPage = new LoginPage(page);
+    await loginPage.navigateToHomepage();
+    await loginPage.clickSignIn();
+
+    // Force click since button is aria-disabled when input is empty
+    await loginPage.claimButton.click({ force: true });
+
+    const errorToast = page.locator('text=Enter your 10-digit mobile number to claim the bonus');
+    await expect(errorToast).toBeVisible();
+  });
+
+  test('should show error for less than 10 digits', async ({ page }) => {
+    await allure.suite('Login');
+    await allure.severity('critical');
+    await allure.description('Verify error toast appears when entering less than 10 digits');
+
+    const loginPage = new LoginPage(page);
+    await loginPage.navigateToHomepage();
+    await loginPage.clickSignIn();
+    await loginPage.enterMobileNumber('23131');
+
+    // Force click since button is aria-disabled when input has < 10 digits
+    await loginPage.claimButton.click({ force: true });
+
+    const errorToast = page.locator('text=/Please enter all 10 digits/');
+    await expect(errorToast).toBeVisible();
+  });
+
+  test('should not accept letters in mobile number field', async ({ page }) => {
+    await allure.suite('Login');
+    await allure.severity('normal');
+    await allure.description('Verify that mobile number input blocks letters and special characters');
+
+    const loginPage = new LoginPage(page);
+    await loginPage.navigateToHomepage();
+    await loginPage.clickSignIn();
+    await loginPage.enterMobileNumber('abcde@#$%');
+
+    // Input should be empty since letters/special chars are blocked
+    const inputValue = await loginPage.mobileInput.inputValue();
+    expect(inputValue).toBe('');
+  });
+
+  test('should not navigate away on wrong OTP', async ({ page }) => {
+    await allure.suite('Login');
+    await allure.severity('critical');
+    await allure.description('Verify user stays on login page and OTP fields reset on entering incorrect OTP');
+
+    const loginPage = new LoginPage(page);
+    await loginPage.navigateToHomepage();
+    await loginPage.clickSignIn();
+    await loginPage.enterMobileNumber(TEST_PHONE);
+    await loginPage.clickClaimButton();
+    await loginPage.waitForOTPScreen();
+
+    await loginPage.enterOTP('999999');
+
+    await page.waitForTimeout(3000);
+    await expect(page).toHaveURL(/.*\/login/);
   });
 
 });
