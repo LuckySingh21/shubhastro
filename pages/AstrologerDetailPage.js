@@ -75,6 +75,32 @@ class AstrologerDetailPage {
     await this.connectNowHeading.waitFor({ state: 'visible', timeout: TIMEOUTS.LONG });
     return true;
   }
+
+  // --- Call / Chat actions ---
+
+  async clickAudioCall() {
+    await this.audioCallOption.click();
+  }
+
+  async clickVideoCall() {
+    await this.videoCallOption.click();
+  }
+
+  async clickChat() {
+    const chatOption = this.page.locator('text=/^Chat$/').first();
+    await chatOption.click();
+  }
+
+  async isRinging() {
+    // After initiating call, "Ringing..." or "Waiting for astrologer" appears
+    const ringingText = this.page.locator('text=/Ringing|Waiting for/');
+    return await ringingText.isVisible({ timeout: TIMEOUTS.LONG }).catch(() => false);
+  }
+
+  async cancelCall() {
+    const cancelButton = this.page.locator('button:has-text("Cancel")').first();
+    await cancelButton.click().catch(() => {});
+  }
 }
 
 module.exports = AstrologerDetailPage;
