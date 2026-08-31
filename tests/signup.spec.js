@@ -109,11 +109,11 @@ test.describe('Signup Flow', () => {
     expect(user.gender).toBe('male');
     expect(user.phoneNumber).toBe(`91${phone}`);
 
-    // Verify ₹250 signup bonus credited to wallet
+    // Verify ₹99 signup bonus credited to wallet
     const wallet = await db.getUserWalletByUserId(user._id);
     expect(wallet).not.toBeNull();
-    expect(wallet.amount).toBeGreaterThanOrEqual(250);
-    expect(wallet.lifetime_credit).toBeGreaterThanOrEqual(250);
+    expect(wallet.amount).toBeGreaterThanOrEqual(99);
+    expect(wallet.lifetime_credit).toBeGreaterThanOrEqual(99);
   });
 
   test('should complete signup with female gender and verify in DB', async ({ page }) => {

@@ -6,6 +6,9 @@ require('dotenv').config();
 
 const TEST_PHONE = process.env.TEST_USER_PHONE;
 const TEST_OTP = process.env.TEST_OTP;
+const ASTRO_OFFLINE = process.env.ASTRO_OFFLINE;
+const ASTRO_EMERGENCY = process.env.ASTRO_EMERGENCY;
+const ASTRO_ONLINE = process.env.ASTRO_ONLINE;
 
 test.describe('Astrologer Detail Page', () => {
 
@@ -36,7 +39,7 @@ test.describe('Astrologer Detail Page', () => {
     await allure.description('Verify Experience, Consultations, and Rating stats are visible');
 
     const detailPage = new AstrologerDetailPage(page);
-    await detailPage.navigate('anirudh');
+    await detailPage.navigate(ASTRO_OFFLINE);
 
     await expect(detailPage.experience).toBeVisible();
     await expect(detailPage.consultations).toBeVisible();
@@ -49,7 +52,7 @@ test.describe('Astrologer Detail Page', () => {
     await allure.description('Verify Chat Minutes, Call Minutes, and Video Minutes are displayed');
 
     const detailPage = new AstrologerDetailPage(page);
-    await detailPage.navigate('anirudh');
+    await detailPage.navigate(ASTRO_OFFLINE);
 
     await expect(detailPage.chatMinutes).toBeVisible();
     await expect(detailPage.callMinutes).toBeVisible();
@@ -62,7 +65,7 @@ test.describe('Astrologer Detail Page', () => {
     await allure.description('Verify USER REVIEWS section with total ratings is visible');
 
     const detailPage = new AstrologerDetailPage(page);
-    await detailPage.navigate('anirudh');
+    await detailPage.navigate(ASTRO_OFFLINE);
 
     await expect(detailPage.userReviewsHeading).toBeVisible();
     await expect(detailPage.totalRatings).toBeVisible();
@@ -74,7 +77,7 @@ test.describe('Astrologer Detail Page', () => {
     await allure.description('Verify Consultation Hours section exists on the page');
 
     const detailPage = new AstrologerDetailPage(page);
-    await detailPage.navigate('anirudh');
+    await detailPage.navigate(ASTRO_OFFLINE);
 
     await expect(detailPage.consultationHoursHeading).toBeAttached();
   });
@@ -85,7 +88,7 @@ test.describe('Astrologer Detail Page', () => {
     await allure.description('Verify CONNECT NOW section is visible on astrologer detail page');
 
     const detailPage = new AstrologerDetailPage(page);
-    await detailPage.navigate('anirudh');
+    await detailPage.navigate(ASTRO_OFFLINE);
 
     await expect(detailPage.connectNowHeading).toBeVisible();
   });
@@ -96,7 +99,7 @@ test.describe('Astrologer Detail Page', () => {
     await allure.description('Verify Follow button is visible on astrologer profile');
 
     const detailPage = new AstrologerDetailPage(page);
-    await detailPage.navigate('anirudh');
+    await detailPage.navigate(ASTRO_OFFLINE);
 
     await expect(detailPage.followButton).toBeVisible();
   });
@@ -109,7 +112,7 @@ test.describe('Astrologer Detail Page', () => {
     await allure.description('Verify offline astrologer shows "Offline" status');
 
     const detailPage = new AstrologerDetailPage(page);
-    await detailPage.navigate('anirudh');
+    await detailPage.navigate(ASTRO_OFFLINE);
 
     await expect(detailPage.offlineStatusBadge).toBeAttached();
   });
@@ -120,7 +123,7 @@ test.describe('Astrologer Detail Page', () => {
     await allure.description('Verify offline astrologer without emergency shows Audio Call and Video Call options');
 
     const detailPage = new AstrologerDetailPage(page);
-    await detailPage.navigate('anirudh');
+    await detailPage.navigate(ASTRO_OFFLINE);
 
     await expect(detailPage.connectNowHeading).toBeVisible();
     await expect(detailPage.audioCallOption).toBeVisible();
@@ -135,7 +138,7 @@ test.describe('Astrologer Detail Page', () => {
     await allure.description('Verify offline astrologer with emergency enabled shows Emergency button');
 
     const detailPage = new AstrologerDetailPage(page);
-    await detailPage.navigate('ahilya');
+    await detailPage.navigate(ASTRO_EMERGENCY);
 
     await expect(detailPage.emergencyButton).toBeAttached();
   });
@@ -146,7 +149,7 @@ test.describe('Astrologer Detail Page', () => {
     await allure.description('Verify message about only emergency sessions available');
 
     const detailPage = new AstrologerDetailPage(page);
-    await detailPage.navigate('ahilya');
+    await detailPage.navigate(ASTRO_EMERGENCY);
 
     await expect(detailPage.emergencyOnlyMessage).toBeVisible();
   });
@@ -159,7 +162,7 @@ test.describe('Astrologer Detail Page', () => {
     await allure.description('Verify astrologer with all services shows either Available Now or Offline status');
 
     const detailPage = new AstrologerDetailPage(page);
-    await detailPage.navigate('arjun');
+    await detailPage.navigate(ASTRO_ONLINE);
 
     // Check that CONNECT NOW section is present (confirms page loaded properly)
     await expect(detailPage.connectNowHeading).toBeVisible();
@@ -171,7 +174,7 @@ test.describe('Astrologer Detail Page', () => {
     await allure.description('Verify astrologer with all services shows Audio Call and Video Call options');
 
     const detailPage = new AstrologerDetailPage(page);
-    await detailPage.navigate('arjun');
+    await detailPage.navigate(ASTRO_ONLINE);
 
     await expect(detailPage.connectNowHeading).toBeVisible();
     await expect(detailPage.audioCallOption).toBeVisible();
@@ -184,7 +187,7 @@ test.describe('Astrologer Detail Page', () => {
     await allure.description('Verify About section with astrologer bio is visible');
 
     const detailPage = new AstrologerDetailPage(page);
-    await detailPage.navigate('arjun');
+    await detailPage.navigate(ASTRO_ONLINE);
 
     await expect(detailPage.aboutHeading).toBeVisible();
   });

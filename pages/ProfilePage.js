@@ -49,20 +49,33 @@ class ProfilePage {
   }
 
   async clickEditProfile() {
-    // Click the edit (pencil) icon on the profile card
-    const editIcon = this.page.locator('svg[class*="edit"], [class*="edit"] svg, button[class*="edit"]').first();
+    // Click the edit (pencil) icon on the profile card (uses title="Edit profile")
+    const editIcon = this.page.locator('button[title="Edit profile"]').first();
     await editIcon.click();
     await this.editProfileHeading.waitFor({ state: 'visible', timeout: TIMEOUTS.LONG });
   }
 
   async waitForEditProfileModal() {
     await this.editProfileHeading.waitFor({ state: 'visible', timeout: TIMEOUTS.LONG });
+    // Wait for the form to be pre-filled (name field should have a non-empty value)
+    const nameField = this.page.locator('input[name="name"]');
+    await nameField.waitFor({ state: 'visible', timeout: TIMEOUTS.LONG });
+    await this.page.waitForFunction(
+      () => {
+        const el = document.querySelector('input[name="name"]');
+        return el && el.value.trim().length > 0;
+      },
+      { timeout: TIMEOUTS.LONG }
+    ).catch(() => {});
   }
 
   async editName(newName) {
-    const nameField = this.page.locator('input').first();
-    await nameField.clear();
-    await nameField.fill(newName);
+    const nameField = this.page.locator('input[name="name"]');
+    await nameField.waitFor({ state: 'visible', timeout: TIMEOUTS.LONG });
+    await nameField.fill(''); // Clear the field
+    if (newName) {
+      await nameField.fill(newName);
+    }
   }
 
   async selectGender(gender) {

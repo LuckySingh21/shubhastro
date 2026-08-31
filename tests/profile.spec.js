@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const TEST_PHONE = process.env.TEST_USER_PHONE;
 const TEST_OTP = process.env.TEST_OTP;
-const ORIGINAL_NAME = 'Lucky Kachhawa';
+const ORIGINAL_NAME = process.env.TEST_USER_ORIGINAL_NAME;
 
 test.describe('User Profile Management', () => {
 
@@ -89,6 +89,10 @@ test.describe('User Profile Management', () => {
       name: ORIGINAL_NAME,
     });
     await profilePage.verifyProfileUpdatedSuccessfully();
+
+    // Confirm the revert actually persisted in the DB
+    const revertedUser = await db.findUserByPhone(TEST_PHONE);
+    expect(revertedUser.fullName || `${revertedUser.firstName} ${revertedUser.lastName}`.trim()).toBe(ORIGINAL_NAME);
   });
 
   test('should edit profile gender and verify in DB', async ({ page }) => {
@@ -156,7 +160,11 @@ test.describe('User Profile Management', () => {
   test('should not update profile in DB when name is empty', async ({ page }) => {
     await allure.suite('Profile');
     await allure.severity('critical');
-    await allure.description('Verify that DB still has original name when save fails due to empty name');
+    await allure.description('Verify that DB name is unchanged when save fails due to empty name');
+
+    // Read the current name from DB BEFORE the test (self-contained, no dependency on other tests)
+    const userBefore = await db.findUserByPhone(TEST_PHONE);
+    const nameBefore = userBefore.fullName || `${userBefore.firstName} ${userBefore.lastName}`.trim();
 
     const profilePage = new ProfilePage(page);
     await profilePage.openEditProfile();
@@ -165,10 +173,11 @@ test.describe('User Profile Management', () => {
     await profilePage.editName('');
     await profilePage.clickSaveProfile();
 
-    // DB verification - name should still be original
-    const user = await db.findUserByPhone(TEST_PHONE);
-    expect(user).not.toBeNull();
-    expect(user.fullName || `${user.firstName} ${user.lastName}`.trim()).toBe(ORIGINAL_NAME);
+    // DB verification - name should be unchanged from before the empty save
+    const userAfter = await db.findUserByPhone(TEST_PHONE);
+    expect(userAfter).not.toBeNull();
+    const nameAfter = userAfter.fullName || `${userAfter.firstName} ${userAfter.lastName}`.trim();
+    expect(nameAfter).toBe(nameBefore);
   });
 
   test('should logout successfully', async ({ page }) => {

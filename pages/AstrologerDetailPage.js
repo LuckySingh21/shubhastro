@@ -9,7 +9,7 @@ class AstrologerDetailPage {
     this.followButton = page.locator('button:has-text("Follow")').first();
 
     // Status - look for visible status text
-    this.availableNowStatus = page.locator('text=Available Now').first();
+    this.availableNowStatus = page.getByText('Available Now', { exact: true });
     this.offlineStatusBadge = page.locator('span:has-text("Offline")').first();
 
     // Stats section
@@ -55,7 +55,7 @@ class AstrologerDetailPage {
   }
 
   async isOnline() {
-    return await this.availableNowStatus.isVisible().catch(() => false);
+    return await this.availableNowStatus.isVisible({ timeout: TIMEOUTS.MEDIUM }).catch(() => false);
   }
 
   async isOffline() {
@@ -80,6 +80,13 @@ class AstrologerDetailPage {
 
   async clickAudioCall() {
     await this.audioCallOption.click();
+    // If a "Microphone Access Required" popup appears, dismiss it by clicking OK
+    const micPopupOk = this.page.locator('button:has-text("OK, Got it")');
+    if (await micPopupOk.isVisible({ timeout: 2000 }).catch(() => false)) {
+      await micPopupOk.click();
+      // Retry the call after acknowledging
+      await this.audioCallOption.click();
+    }
   }
 
   async clickVideoCall() {
@@ -92,9 +99,16 @@ class AstrologerDetailPage {
   }
 
   async isRinging() {
-    // After initiating call, "Ringing..." or "Waiting for astrologer" appears
-    const ringingText = this.page.locator('text=/Ringing|Waiting for/');
-    return await ringingText.isVisible({ timeout: TIMEOUTS.LONG }).catch(() => false);
+    // After initiating call, one of these states appears:
+    // - "Ringing..."
+    // - "Waiting for X astrologer"
+    // - "Cancel All" button
+    // - A "Cancel" button on the call card
+    const callInProgress = this.page.locator(
+      'text=/Ringing|Waiting for|Cancel All/i'
+    ).or(this.page.locator('button:has-text("Cancel All")'));
+
+    return await callInProgress.first().isVisible({ timeout: TIMEOUTS.EXTRA_LONG }).catch(() => false);
   }
 
   async cancelCall() {
