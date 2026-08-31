@@ -1,0 +1,39 @@
+{
+  "knownCities": [
+    { "query": "pune",       "expectedName": "Pune",      "expectedCountry": "IN", "lat": 18.51957, "lng": 73.85535 },
+    { "query": "mumbai",     "expectedName": "Mumbai",    "expectedCountry": "IN", "lat": 19.07283, "lng": 72.88261 },
+    { "query": "delhi",      "expectedName": "Delhi",     "expectedCountry": "IN", "lat": 28.65195, "lng": 77.23149 },
+    { "query": "bangalore",  "expectedName": "Bengaluru", "expectedCountry": "IN", "lat": 12.97194, "lng": 77.59369 },
+    { "query": "kolkata",    "expectedName": "Kolkata",   "expectedCountry": "IN", "lat": 22.56263, "lng": 88.36304 },
+    { "query": "chennai",    "expectedName": "Chennai",   "expectedCountry": "IN", "lat": 13.08784, "lng": 80.27847 },
+    { "query": "hyderabad",  "expectedName": "Hyderabad", "expectedCountry": "IN", "lat": 17.38405, "lng": 78.45636 },
+    { "query": "varanasi",   "expectedName": "Varanasi",  "expectedCountry": "IN", "lat": 25.31668, "lng": 83.01041 },
+    { "query": "prayagraj",  "expectedName": "Prayagraj", "expectedCountry": "IN", "lat": 25.44780, "lng": 81.83320 },
+    { "query": "gurgaon",    "expectedName": "Gurugram",  "expectedCountry": "IN", "lat": 28.45947, "lng": 77.02674 },
+    { "query": "srinagar",   "expectedName": "Srinagar",  "expectedCountry": "IN", "lat": 34.08565, "lng": 74.80555 },
+    { "query": "jaipur",     "expectedName": "Jaipur",    "expectedCountry": "IN", "lat": 26.91962, "lng": 75.78781 },
+    { "query": "lucknow",    "expectedName": "Lucknow",   "expectedCountry": "IN", "lat": 26.83928, "lng": 80.92313 },
+    { "query": "ahmedabad",  "expectedName": "Ahmedabad", "expectedCountry": "IN", "lat": 23.02579, "lng": 72.58727 },
+    { "query": "new york",   "expectedName": "New York",  "expectedCountry": "US", "lat": 40.71427, "lng": -74.00597 },
+    { "query": "london",     "expectedName": "London",    "expectedCountry": "GB", "lat": 51.50853, "lng": -0.12574 },
+    { "query": "tokyo",      "expectedName": "Tokyo",     "expectedCountry": "JP", "lat": 35.6895,  "lng": 139.69171 },
+    { "query": "dubai",      "expectedName": "Dubai",     "expectedCountry": "AE", "lat": 25.0657,  "lng": 55.17128 }
+  ],
+  "smallTowns": [
+    { "query": "kolar",      "expectedCountry": "IN" },
+    { "query": "bhuj",       "expectedCountry": "IN" },
+    { "query": "gangtok",    "expectedCountry": "IN" },
+    { "query": "port blair", "expectedCountry": "IN" },
+    { "query": "leh",        "expectedCountry": "IN" }
+  ],
+  "edgeCases": [
+    { "query": "",          "label": "empty string" },
+    { "query": "   ",       "label": "whitespace only" },
+    { "query": "xyzqwvbn",  "label": "gibberish" },
+    { "query": "12345",     "label": "numeric only" },
+    { "query": "!@#$%",     "label": "special characters" },
+    { "query": "a",         "label": "single character" },
+    { "query": "São Paulo", "label": "non-ascii / accented" },
+    { "query": "new-delhi", "label": "hyphenated" }
+  ]
+}

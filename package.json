@@ -9,6 +9,8 @@
     "test:firefox": "npx rimraf allure-results allure-report && npx playwright test --project=firefox",
     "test:safari": "npx rimraf allure-results allure-report && npx playwright test --project=webkit",
     "test:debug": "npx playwright test --debug",
+    "test:geo": "npx rimraf test-results/geo-new-vs-current-report.jsonl && npx playwright test geo- --project=chromium && node utils/geoReport.js",
+    "geo:report": "node utils/geoReport.js",
     "report": "npx allure serve allure-results",
     "report:generate": "npx allure generate allure-results --clean -o allure-report",
     "clean:results": "npx rimraf allure-results allure-report"
