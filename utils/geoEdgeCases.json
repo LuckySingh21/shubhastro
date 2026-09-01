@@ -1,0 +1,10 @@
+[
+  { "query": "",          "label": "empty string" },
+  { "query": "   ",       "label": "whitespace only" },
+  { "query": "xyzqwvbn",  "label": "gibberish" },
+  { "query": "12345",     "label": "numeric only" },
+  { "query": "!@#$%",     "label": "special characters" },
+  { "query": "a",         "label": "single character" },
+  { "query": "São Paulo", "label": "non-ascii / accented" },
+  { "query": "new-delhi", "label": "hyphenated" }
+]

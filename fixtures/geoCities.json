@@ -1,39 +1,1141 @@
 {
+  "note": "Reference coordinates from OpenStreetMap Nominatim (independent source of truth). Regenerate with: node utils/generateGeoCities.js",
   "knownCities": [
-    { "query": "pune",       "expectedName": "Pune",      "expectedCountry": "IN", "lat": 18.51957, "lng": 73.85535 },
-    { "query": "mumbai",     "expectedName": "Mumbai",    "expectedCountry": "IN", "lat": 19.07283, "lng": 72.88261 },
-    { "query": "delhi",      "expectedName": "Delhi",     "expectedCountry": "IN", "lat": 28.65195, "lng": 77.23149 },
-    { "query": "bangalore",  "expectedName": "Bengaluru", "expectedCountry": "IN", "lat": 12.97194, "lng": 77.59369 },
-    { "query": "kolkata",    "expectedName": "Kolkata",   "expectedCountry": "IN", "lat": 22.56263, "lng": 88.36304 },
-    { "query": "chennai",    "expectedName": "Chennai",   "expectedCountry": "IN", "lat": 13.08784, "lng": 80.27847 },
-    { "query": "hyderabad",  "expectedName": "Hyderabad", "expectedCountry": "IN", "lat": 17.38405, "lng": 78.45636 },
-    { "query": "varanasi",   "expectedName": "Varanasi",  "expectedCountry": "IN", "lat": 25.31668, "lng": 83.01041 },
-    { "query": "prayagraj",  "expectedName": "Prayagraj", "expectedCountry": "IN", "lat": 25.44780, "lng": 81.83320 },
-    { "query": "gurgaon",    "expectedName": "Gurugram",  "expectedCountry": "IN", "lat": 28.45947, "lng": 77.02674 },
-    { "query": "srinagar",   "expectedName": "Srinagar",  "expectedCountry": "IN", "lat": 34.08565, "lng": 74.80555 },
-    { "query": "jaipur",     "expectedName": "Jaipur",    "expectedCountry": "IN", "lat": 26.91962, "lng": 75.78781 },
-    { "query": "lucknow",    "expectedName": "Lucknow",   "expectedCountry": "IN", "lat": 26.83928, "lng": 80.92313 },
-    { "query": "ahmedabad",  "expectedName": "Ahmedabad", "expectedCountry": "IN", "lat": 23.02579, "lng": 72.58727 },
-    { "query": "new york",   "expectedName": "New York",  "expectedCountry": "US", "lat": 40.71427, "lng": -74.00597 },
-    { "query": "london",     "expectedName": "London",    "expectedCountry": "GB", "lat": 51.50853, "lng": -0.12574 },
-    { "query": "tokyo",      "expectedName": "Tokyo",     "expectedCountry": "JP", "lat": 35.6895,  "lng": 139.69171 },
-    { "query": "dubai",      "expectedName": "Dubai",     "expectedCountry": "AE", "lat": 25.0657,  "lng": 55.17128 }
+    {
+      "query": "mumbai",
+      "expectedName": "Mumbai",
+      "expectedCountry": "IN",
+      "lat": 19.054999,
+      "lng": 72.8692035
+    },
+    {
+      "query": "delhi",
+      "expectedName": "Delhi",
+      "expectedCountry": "IN",
+      "lat": 28.6328027,
+      "lng": 77.2197713
+    },
+    {
+      "query": "bangalore",
+      "expectedName": "Bengaluru",
+      "expectedCountry": "IN",
+      "lat": 12.9767936,
+      "lng": 77.590082
+    },
+    {
+      "query": "kolkata",
+      "expectedName": "Kolkata",
+      "expectedCountry": "IN",
+      "lat": 22.5726459,
+      "lng": 88.3638953
+    },
+    {
+      "query": "chennai",
+      "expectedName": "Chennai Corporation",
+      "expectedCountry": "IN",
+      "lat": 13.0836939,
+      "lng": 80.270186
+    },
+    {
+      "query": "hyderabad",
+      "expectedName": "Hyderabad",
+      "expectedCountry": "IN",
+      "lat": 17.360589,
+      "lng": 78.4740613
+    },
+    {
+      "query": "pune",
+      "expectedName": "Pune",
+      "expectedCountry": "IN",
+      "lat": 18.5213738,
+      "lng": 73.8545071
+    },
+    {
+      "query": "ahmedabad",
+      "expectedName": "Ahmedabad",
+      "expectedCountry": "IN",
+      "lat": 23.0215374,
+      "lng": 72.5800568
+    },
+    {
+      "query": "jaipur",
+      "expectedName": "Jaipur",
+      "expectedCountry": "IN",
+      "lat": 26.9154576,
+      "lng": 75.8189817
+    },
+    {
+      "query": "lucknow",
+      "expectedName": "Lucknow",
+      "expectedCountry": "IN",
+      "lat": 26.8381,
+      "lng": 80.9346001
+    },
+    {
+      "query": "kanpur",
+      "expectedName": "Kanpur",
+      "expectedCountry": "IN",
+      "lat": 26.4609135,
+      "lng": 80.3217588
+    },
+    {
+      "query": "nagpur",
+      "expectedName": "Nagpur City",
+      "expectedCountry": "IN",
+      "lat": 21.1498134,
+      "lng": 79.0820556
+    },
+    {
+      "query": "indore",
+      "expectedName": "Indore",
+      "expectedCountry": "IN",
+      "lat": 22.7203616,
+      "lng": 75.8681996
+    },
+    {
+      "query": "bhopal",
+      "expectedName": "Bhopal",
+      "expectedCountry": "IN",
+      "lat": 23.2584857,
+      "lng": 77.401989
+    },
+    {
+      "query": "patna",
+      "expectedName": "Patna",
+      "expectedCountry": "IN",
+      "lat": 25.6093239,
+      "lng": 85.1235252
+    },
+    {
+      "query": "vadodara",
+      "expectedName": "Vadodara",
+      "expectedCountry": "IN",
+      "lat": 22.2973142,
+      "lng": 73.1942567
+    },
+    {
+      "query": "ghaziabad",
+      "expectedName": "Ghaziabad",
+      "expectedCountry": "IN",
+      "lat": 28.7749966,
+      "lng": 77.4586967
+    },
+    {
+      "query": "ludhiana",
+      "expectedName": "Ludhiana",
+      "expectedCountry": "IN",
+      "lat": 30.9090157,
+      "lng": 75.851601
+    },
+    {
+      "query": "agra",
+      "expectedName": "Agra",
+      "expectedCountry": "IN",
+      "lat": 27.1752554,
+      "lng": 78.0098161
+    },
+    {
+      "query": "nashik",
+      "expectedName": "Nashik",
+      "expectedCountry": "IN",
+      "lat": 20.0112475,
+      "lng": 73.7902364
+    },
+    {
+      "query": "faridabad",
+      "expectedName": "Faridabad",
+      "expectedCountry": "IN",
+      "lat": 28.4031478,
+      "lng": 77.3105561
+    },
+    {
+      "query": "meerut",
+      "expectedName": "Meerut",
+      "expectedCountry": "IN",
+      "lat": 29.0018557,
+      "lng": 77.7679671
+    },
+    {
+      "query": "rajkot",
+      "expectedName": "Rajkot",
+      "expectedCountry": "IN",
+      "lat": 22.3053263,
+      "lng": 70.8028377
+    },
+    {
+      "query": "varanasi",
+      "expectedName": "Varanasi",
+      "expectedCountry": "IN",
+      "lat": 25.3356491,
+      "lng": 83.0076292
+    },
+    {
+      "query": "srinagar",
+      "expectedName": "Srinagar",
+      "expectedCountry": "IN",
+      "lat": 34.0747444,
+      "lng": 74.8204443
+    },
+    {
+      "query": "aurangabad",
+      "expectedName": "Chhatrapati Sambhajinagar",
+      "expectedCountry": "IN",
+      "lat": 19.877263,
+      "lng": 75.3390241
+    },
+    {
+      "query": "dhanbad",
+      "expectedName": "Dhanbad",
+      "expectedCountry": "IN",
+      "lat": 23.7952809,
+      "lng": 86.4309638
+    },
+    {
+      "query": "amritsar",
+      "expectedName": "Amritsar",
+      "expectedCountry": "IN",
+      "lat": 31.6356659,
+      "lng": 74.8787496
+    },
+    {
+      "query": "allahabad",
+      "expectedName": "Prayagraj",
+      "expectedCountry": "IN",
+      "lat": 25.4381302,
+      "lng": 81.8338005
+    },
+    {
+      "query": "ranchi",
+      "expectedName": "Ranchi",
+      "expectedCountry": "IN",
+      "lat": 23.3700501,
+      "lng": 85.3250387
+    },
+    {
+      "query": "howrah",
+      "expectedName": "Haora",
+      "expectedCountry": "IN",
+      "lat": 22.5736296,
+      "lng": 88.3251045
+    },
+    {
+      "query": "coimbatore",
+      "expectedName": "Coimbatore",
+      "expectedCountry": "IN",
+      "lat": 11.0018115,
+      "lng": 76.9628425
+    },
+    {
+      "query": "jabalpur",
+      "expectedName": "Jabalpur",
+      "expectedCountry": "IN",
+      "lat": 23.1701522,
+      "lng": 79.9324505
+    },
+    {
+      "query": "gwalior",
+      "expectedName": "Gwalior",
+      "expectedCountry": "IN",
+      "lat": 26.2037247,
+      "lng": 78.1573628
+    },
+    {
+      "query": "vijayawada",
+      "expectedName": "Vijayawada",
+      "expectedCountry": "IN",
+      "lat": 16.5115306,
+      "lng": 80.6160469
+    },
+    {
+      "query": "jodhpur",
+      "expectedName": "Jodhpur",
+      "expectedCountry": "IN",
+      "lat": 26.2967719,
+      "lng": 73.0351433
+    },
+    {
+      "query": "madurai",
+      "expectedName": "Madurai",
+      "expectedCountry": "IN",
+      "lat": 9.9261153,
+      "lng": 78.1140983
+    },
+    {
+      "query": "raipur",
+      "expectedName": "Raipur",
+      "expectedCountry": "IN",
+      "lat": 21.2380912,
+      "lng": 81.6336993
+    },
+    {
+      "query": "kota",
+      "expectedName": "Kota",
+      "expectedCountry": "IN",
+      "lat": 25.1737019,
+      "lng": 75.8574194
+    },
+    {
+      "query": "guwahati",
+      "expectedName": "Guwahati",
+      "expectedCountry": "IN",
+      "lat": 26.1805978,
+      "lng": 91.753943
+    },
+    {
+      "query": "chandigarh",
+      "expectedName": "Chandigarh",
+      "expectedCountry": "IN",
+      "lat": 30.7334421,
+      "lng": 76.7797143
+    },
+    {
+      "query": "thiruvananthapuram",
+      "expectedName": "Thiruvananthapuram",
+      "expectedCountry": "IN",
+      "lat": 8.4882267,
+      "lng": 76.947551
+    },
+    {
+      "query": "solapur",
+      "expectedName": "Solapur",
+      "expectedCountry": "IN",
+      "lat": 17.8499067,
+      "lng": 75.2763203
+    },
+    {
+      "query": "hubli",
+      "expectedName": "Hubballi",
+      "expectedCountry": "IN",
+      "lat": 15.3518378,
+      "lng": 75.1379848
+    },
+    {
+      "query": "mysore",
+      "expectedName": "Mysuru",
+      "expectedCountry": "IN",
+      "lat": 12.3051828,
+      "lng": 76.6553609
+    },
+    {
+      "query": "tiruchirappalli",
+      "expectedName": "Tiruchirappalli",
+      "expectedCountry": "IN",
+      "lat": 10.8071144,
+      "lng": 78.6880939
+    },
+    {
+      "query": "bareilly",
+      "expectedName": "Bareilly",
+      "expectedCountry": "IN",
+      "lat": 28.4582345,
+      "lng": 79.4047452
+    },
+    {
+      "query": "aligarh",
+      "expectedName": "Aligarh",
+      "expectedCountry": "IN",
+      "lat": 27.8761073,
+      "lng": 78.1358153
+    },
+    {
+      "query": "moradabad",
+      "expectedName": "Moradabad",
+      "expectedCountry": "IN",
+      "lat": 28.8796553,
+      "lng": 78.8095335
+    },
+    {
+      "query": "bhubaneswar",
+      "expectedName": "Bhubaneswar",
+      "expectedCountry": "IN",
+      "lat": 20.2602964,
+      "lng": 85.8394521
+    },
+    {
+      "query": "salem",
+      "expectedName": "Salem",
+      "expectedCountry": "IN",
+      "lat": 11.6469616,
+      "lng": 78.2106958
+    },
+    {
+      "query": "warangal",
+      "expectedName": "Warangal",
+      "expectedCountry": "IN",
+      "lat": 17.9820644,
+      "lng": 79.5970954
+    },
+    {
+      "query": "guntur",
+      "expectedName": "Guntur",
+      "expectedCountry": "IN",
+      "lat": 16.2915189,
+      "lng": 80.4541588
+    },
+    {
+      "query": "bhiwandi",
+      "expectedName": "Bhiwandi",
+      "expectedCountry": "IN",
+      "lat": 19.3025562,
+      "lng": 73.0588072
+    },
+    {
+      "query": "saharanpur",
+      "expectedName": "Saharanpur",
+      "expectedCountry": "IN",
+      "lat": 29.9856799,
+      "lng": 77.5040646
+    },
+    {
+      "query": "gorakhpur",
+      "expectedName": "Gorakhpur",
+      "expectedCountry": "IN",
+      "lat": 26.6677977,
+      "lng": 83.3642334
+    },
+    {
+      "query": "bikaner",
+      "expectedName": "Bikaner",
+      "expectedCountry": "IN",
+      "lat": 28.0159286,
+      "lng": 73.3171367
+    },
+    {
+      "query": "amravati",
+      "expectedName": "Amravati",
+      "expectedCountry": "IN",
+      "lat": 21.1545412,
+      "lng": 77.6442962
+    },
+    {
+      "query": "noida",
+      "expectedName": "Noida",
+      "expectedCountry": "IN",
+      "lat": 28.5706333,
+      "lng": 77.3272147
+    },
+    {
+      "query": "jamshedpur",
+      "expectedName": "Jamshedpur",
+      "expectedCountry": "IN",
+      "lat": 22.8015194,
+      "lng": 86.2029579
+    },
+    {
+      "query": "bhilai",
+      "expectedName": "Bhilai",
+      "expectedCountry": "IN",
+      "lat": 21.2120677,
+      "lng": 81.3732849
+    },
+    {
+      "query": "cuttack",
+      "expectedName": "Cuttack",
+      "expectedCountry": "IN",
+      "lat": 20.4686,
+      "lng": 85.8792
+    },
+    {
+      "query": "firozabad",
+      "expectedName": "Firozabad",
+      "expectedCountry": "IN",
+      "lat": 27.1941954,
+      "lng": 78.4604956
+    },
+    {
+      "query": "kochi",
+      "expectedName": "Kochi",
+      "expectedCountry": "IN",
+      "lat": 9.9679032,
+      "lng": 76.2444378
+    },
+    {
+      "query": "nellore",
+      "expectedName": "Nellore",
+      "expectedCountry": "IN",
+      "lat": 14.4493717,
+      "lng": 79.9873763
+    },
+    {
+      "query": "bhavnagar",
+      "expectedName": "Bhavnagar",
+      "expectedCountry": "IN",
+      "lat": 21.7718836,
+      "lng": 72.1416449
+    },
+    {
+      "query": "dehradun",
+      "expectedName": "Dehradun",
+      "expectedCountry": "IN",
+      "lat": 30.3255646,
+      "lng": 78.0436813
+    },
+    {
+      "query": "durgapur",
+      "expectedName": "Durgapur",
+      "expectedCountry": "IN",
+      "lat": 23.5350475,
+      "lng": 87.3380425
+    },
+    {
+      "query": "asansol",
+      "expectedName": "Asansol",
+      "expectedCountry": "IN",
+      "lat": 23.6871297,
+      "lng": 86.9746587
+    },
+    {
+      "query": "rourkela",
+      "expectedName": "Rourkela",
+      "expectedCountry": "IN",
+      "lat": 22.2309255,
+      "lng": 84.8678705
+    },
+    {
+      "query": "nanded",
+      "expectedName": "Nanded",
+      "expectedCountry": "IN",
+      "lat": 19.0942729,
+      "lng": 77.4832628
+    },
+    {
+      "query": "kolhapur",
+      "expectedName": "Kolhapur",
+      "expectedCountry": "IN",
+      "lat": 16.7028412,
+      "lng": 74.2405329
+    },
+    {
+      "query": "ajmer",
+      "expectedName": "Ajmer",
+      "expectedCountry": "IN",
+      "lat": 26.4691,
+      "lng": 74.639
+    },
+    {
+      "query": "akola",
+      "expectedName": "Akola",
+      "expectedCountry": "IN",
+      "lat": 20.7618122,
+      "lng": 77.1921157
+    },
+    {
+      "query": "gulbarga",
+      "expectedName": "Kalaburagi",
+      "expectedCountry": "IN",
+      "lat": 17.3310003,
+      "lng": 76.8334228
+    },
+    {
+      "query": "jamnagar",
+      "expectedName": "Jamnagar",
+      "expectedCountry": "IN",
+      "lat": 22.4732415,
+      "lng": 70.0552102
+    },
+    {
+      "query": "ujjain",
+      "expectedName": "Ujjain",
+      "expectedCountry": "IN",
+      "lat": 23.1885131,
+      "lng": 75.7716562
+    },
+    {
+      "query": "loni",
+      "expectedName": "Loni",
+      "expectedCountry": "IN",
+      "lat": 21.2752309,
+      "lng": 76.1606744
+    },
+    {
+      "query": "siliguri",
+      "expectedName": "Siliguri",
+      "expectedCountry": "IN",
+      "lat": 26.7164127,
+      "lng": 88.4309916
+    },
+    {
+      "query": "jhansi",
+      "expectedName": "Jhansi",
+      "expectedCountry": "IN",
+      "lat": 25.529855,
+      "lng": 78.6527802
+    },
+    {
+      "query": "ulhasnagar",
+      "expectedName": "Ulhasnagar",
+      "expectedCountry": "IN",
+      "lat": 19.2236329,
+      "lng": 73.1671515
+    },
+    {
+      "query": "jammu",
+      "expectedName": "Jammu",
+      "expectedCountry": "IN",
+      "lat": 32.7185614,
+      "lng": 74.8580917
+    },
+    {
+      "query": "sangli",
+      "expectedName": "Sangli",
+      "expectedCountry": "IN",
+      "lat": 17.1726928,
+      "lng": 74.5867654
+    },
+    {
+      "query": "mangalore",
+      "expectedName": "Mangaluru",
+      "expectedCountry": "IN",
+      "lat": 12.8698101,
+      "lng": 74.8430082
+    },
+    {
+      "query": "erode",
+      "expectedName": "Erode",
+      "expectedCountry": "IN",
+      "lat": 11.4905282,
+      "lng": 77.3505274
+    },
+    {
+      "query": "belgaum",
+      "expectedName": "Belagavi",
+      "expectedCountry": "IN",
+      "lat": 15.8572666,
+      "lng": 74.5069343
+    },
+    {
+      "query": "ambattur",
+      "expectedName": "Zone 7 Ambattur",
+      "expectedCountry": "IN",
+      "lat": 13.1055654,
+      "lng": 80.1639586
+    },
+    {
+      "query": "tirunelveli",
+      "expectedName": "Tirunelveli",
+      "expectedCountry": "IN",
+      "lat": 8.5495014,
+      "lng": 77.5805178
+    },
+    {
+      "query": "malegaon",
+      "expectedName": "Malegaon",
+      "expectedCountry": "IN",
+      "lat": 20.5576062,
+      "lng": 74.5246514
+    },
+    {
+      "query": "gaya",
+      "expectedName": "Gaya",
+      "expectedCountry": "IN",
+      "lat": 24.7964355,
+      "lng": 85.0079563
+    },
+    {
+      "query": "udaipur",
+      "expectedName": "Udaipur",
+      "expectedCountry": "IN",
+      "lat": 24.578721,
+      "lng": 73.6862571
+    },
+    {
+      "query": "maheshtala",
+      "expectedName": "Maheshtala",
+      "expectedCountry": "IN",
+      "lat": 22.5060294,
+      "lng": 88.2501665
+    },
+    {
+      "query": "davanagere",
+      "expectedName": "Davanagere",
+      "expectedCountry": "IN",
+      "lat": 14.2558835,
+      "lng": 75.8303421
+    },
+    {
+      "query": "kozhikode",
+      "expectedName": "Kozhikode",
+      "expectedCountry": "IN",
+      "lat": 11.2450558,
+      "lng": 75.7754716
+    },
+    {
+      "query": "kurnool",
+      "expectedName": "Kurnool",
+      "expectedCountry": "IN",
+      "lat": 15.8309251,
+      "lng": 78.0425373
+    },
+    {
+      "query": "rajahmundry",
+      "expectedName": "Rajamahendravaram",
+      "expectedCountry": "IN",
+      "lat": 17.0050454,
+      "lng": 81.7804732
+    },
+    {
+      "query": "bokaro",
+      "expectedName": "Bokaro",
+      "expectedCountry": "IN",
+      "lat": 23.6991279,
+      "lng": 85.9910689
+    },
+    {
+      "query": "south dumdum",
+      "expectedName": "South Dumdum",
+      "expectedCountry": "IN",
+      "lat": 22.6180871,
+      "lng": 88.412251
+    },
+    {
+      "query": "bellary",
+      "expectedName": "Ballari",
+      "expectedCountry": "IN",
+      "lat": 15.1430224,
+      "lng": 76.9173277
+    },
+    {
+      "query": "patiala",
+      "expectedName": "Patiala",
+      "expectedCountry": "IN",
+      "lat": 30.2092778,
+      "lng": 76.3397231
+    }
   ],
   "smallTowns": [
-    { "query": "kolar",      "expectedCountry": "IN" },
-    { "query": "bhuj",       "expectedCountry": "IN" },
-    { "query": "gangtok",    "expectedCountry": "IN" },
-    { "query": "port blair", "expectedCountry": "IN" },
-    { "query": "leh",        "expectedCountry": "IN" }
+    {
+      "query": "kolar",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "bhuj",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "gangtok",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "port blair",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "leh",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "pathankot",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "hazaribagh",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "baripada",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "chittoor",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "hindupur",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "mandya",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "karur",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "dindigul",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "nagercoil",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "palakkad",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "alappuzha",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "kollam",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "kottayam",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "kannur",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "thrissur",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "bardhaman",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "kharagpur",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "haldia",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "krishnanagar",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "raiganj",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "balurghat",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "jalpaiguri",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "cooch behar",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "purulia",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "bankura",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "midnapore",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "berhampore",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "deoghar",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "giridih",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "ramgarh",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "chaibasa",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "dumka",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "phusro",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "medininagar",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "chirkunda",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "sambalpur",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "balasore",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "bhadrak",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "baleshwar",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "jharsuguda",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "jeypore",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "bhawanipatna",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "rayagada",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "angul",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "dhenkanal",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "barbil",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "kendujhar",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "nabarangpur",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "paradip",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "puri",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "konark",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "bhimavaram",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "tenali",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "chilakaluripet",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "proddatur",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "adoni",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "madanapalle",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "tadepalligudem",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "eluru",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "machilipatnam",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "srikakulam",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "vizianagaram",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "anakapalle",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "tuni",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "amalapuram",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "palasa",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "bobbili",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "sagar",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "satna",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "rewa",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "ratlam",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "dewas",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "mandsaur",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "neemuch",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "chhindwara",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "katni",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "vidisha",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "damoh",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "shivpuri",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "guna",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "sehore",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "betul",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "hoshangabad",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "barpeta",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "dibrugarh",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "tinsukia",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "nagaon",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "tezpur",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "jorhat",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "silchar",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "dhubri",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "goalpara",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "sivasagar",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "bongaigaon",
+      "expectedCountry": "IN"
+    },
+    {
+      "query": "karimganj",
+      "expectedCountry": "IN"
+    }
   ],
   "edgeCases": [
-    { "query": "",          "label": "empty string" },
-    { "query": "   ",       "label": "whitespace only" },
-    { "query": "xyzqwvbn",  "label": "gibberish" },
-    { "query": "12345",     "label": "numeric only" },
-    { "query": "!@#$%",     "label": "special characters" },
-    { "query": "a",         "label": "single character" },
-    { "query": "São Paulo", "label": "non-ascii / accented" },
-    { "query": "new-delhi", "label": "hyphenated" }
+    {
+      "query": "",
+      "label": "empty string"
+    },
+    {
+      "query": "   ",
+      "label": "whitespace only"
+    },
+    {
+      "query": "xyzqwvbn",
+      "label": "gibberish"
+    },
+    {
+      "query": "12345",
+      "label": "numeric only"
+    },
+    {
+      "query": "!@#$%",
+      "label": "special characters"
+    },
+    {
+      "query": "a",
+      "label": "single character"
+    },
+    {
+      "query": "São Paulo",
+      "label": "non-ascii / accented"
+    },
+    {
+      "query": "new-delhi",
+      "label": "hyphenated"
+    }
   ]
 }

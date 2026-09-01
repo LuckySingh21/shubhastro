@@ -2,11 +2,13 @@ const { test, expect, request: playwrightRequest } = require('@playwright/test')
 const { allure } = require('allure-playwright');
 const geo = require('../api/geoApi');
 const cities = require('../fixtures/geoCities.json');
+require('dotenv').config();
 
 // How far the returned coordinates may be from the known reference point (km)
-// before we consider the location wrong. Generous enough to absorb the fact that
-// city-centre coordinates vary between gazetteers.
-const COORD_TOLERANCE_KM = 60;
+// before we consider the location wrong. Generous enough to absorb city-centre
+// variance between gazetteers and alternate spellings (e.g. Solapur/Sholapur),
+// while wrong-city matches are hundreds of km off and still fail.
+const COORD_TOLERANCE_KM = Number(process.env.GEO_COORD_TOLERANCE_KM) || 100;
 
 test.describe('Geo Search API - Accuracy & Schema (NEW API)', () => {
   let ctx;

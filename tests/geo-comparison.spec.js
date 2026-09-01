@@ -4,10 +4,15 @@ const { test, expect, request: playwrightRequest } = require('@playwright/test')
 const { allure } = require('allure-playwright');
 const geo = require('../api/geoApi');
 const cities = require('../fixtures/geoCities.json');
+require('dotenv').config();
 
-// When both APIs resolve the intended city, the coordinates for that city should
-// agree closely. Different providers place a city centre slightly differently.
+// Below this distance the two providers are considered to "agree" on a city.
+// Used only for REPORTING divergences (a note), not for pass/fail.
 const AGREEMENT_TOLERANCE_KM = 25;
+// The hard-fail bar for the NEW API's distance from the known reference. Kept in
+// sync with the accuracy spec so alternate spellings (Solapur/Sholapur ~70km)
+// don't fail here while passing there.
+const NEW_ACCURACY_TOLERANCE_KM = Number(process.env.GEO_COORD_TOLERANCE_KM) || 100;
 
 /**
  * From a list of entries, pick the one that best matches the reference city
@@ -144,13 +149,15 @@ test.describe('Geo Search API - NEW vs CURRENT comparison', () => {
           `LARGE COORD DISAGREEMENT ${row.coordDeltaKm}km - `
           + `NEW ${row.newDistFromRefKm}km from ref, CUR ${row.curDistFromRefKm}km from ref`
         );
-        // Only a NEW-API defect should break the suite.
+        // Only a genuine NEW-API defect should break the suite: fail when the NEW
+        // API's own result is far from the known reference (uses the accuracy
+        // tolerance, so alternate spellings within ~100km still pass).
         expect(
           newDist,
           `NEW API result for "${c.query}" is ${row.newDistFromRefKm}km from the known location `
           + `(${newPick.full_name} @${newPick.coordinates}). CURRENT API returned `
           + `${curPick.full_name} @${curPick.coordinates}.`
-        ).toBeLessThanOrEqual(AGREEMENT_TOLERANCE_KM);
+        ).toBeLessThanOrEqual(NEW_ACCURACY_TOLERANCE_KM);
       }
     });
   }

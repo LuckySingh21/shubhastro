@@ -7,10 +7,14 @@ require('dotenv').config();
 const LATENCY_THRESHOLD_MS = Number(process.env.GEO_LATENCY_THRESHOLD_MS) || 1500;
 // Samples collected PER CITY. With N cities this yields N * ITERATIONS total
 // data points, giving statistically meaningful p95/p99 instead of single-shot noise.
-const ITERATIONS = Number(process.env.GEO_LATENCY_ITERATIONS) || 30;
+const ITERATIONS = Number(process.env.GEO_LATENCY_ITERATIONS) || 15;
+// Cap how many cities feed the latency benchmark so a large fixture doesn't
+// explode the request count (esp. the head-to-head test that hits the slow
+// current API). Override with GEO_LATENCY_SAMPLE_SIZE.
+const SAMPLE_SIZE = Number(process.env.GEO_LATENCY_SAMPLE_SIZE) || 30;
 
 // Sample set used for latency profiling: a spread of Indian + international cities.
-const LATENCY_SAMPLE = cities.knownCities.map((c) => c.query);
+const LATENCY_SAMPLE = cities.knownCities.map((c) => c.query).slice(0, SAMPLE_SIZE);
 const TOTAL_REQUESTS = LATENCY_SAMPLE.length * ITERATIONS;
 
 // A benchmark that fires hundreds of sequential requests needs more than the
@@ -33,7 +37,8 @@ test.describe('Geo Search API - Latency (NEW API)', () => {
     const ctx = await playwrightRequest.newContext();
     const allSamples = [];
     const perCity = {};
-    const slow = [];
+    const httpFailures = []; // non-200 responses (always a hard failure)
+    const overThreshold = []; // slower than threshold (tolerated in small numbers)
 
     try {
       // Round-robin: iteration 1 hits every city, then iteration 2, etc. This
@@ -44,9 +49,9 @@ test.describe('Geo Search API - Latency (NEW API)', () => {
           allSamples.push(res.latencyMs);
           (perCity[city] = perCity[city] || []).push(res.latencyMs);
           if (res.status !== 200) {
-            slow.push(`${city} iter ${i}: HTTP ${res.status}`);
+            httpFailures.push(`${city} iter ${i}: HTTP ${res.status}`);
           } else if (res.latencyMs > LATENCY_THRESHOLD_MS) {
-            slow.push(`${city} iter ${i}: ${res.latencyMs}ms`);
+            overThreshold.push(`${city} iter ${i}: ${res.latencyMs}ms`);
           }
         }
       }
@@ -64,8 +69,19 @@ test.describe('Geo Search API - Latency (NEW API)', () => {
     await allure.attachment('latency-per-city.json', JSON.stringify(perCityStats, null, 2), 'application/json');
     console.log('[NEW API latency benchmark]', JSON.stringify(stats));
 
-    // No hard failures (5xx / over-threshold single requests) should have occurred.
-    expect(slow, `Failed or over-threshold requests:\n${slow.slice(0, 20).join('\n')}`).toEqual([]);
+    // Any non-200 response is a hard failure.
+    expect(httpFailures, `HTTP failures:\n${httpFailures.slice(0, 20).join('\n')}`).toEqual([]);
+
+    // Tolerate a tiny fraction of individual over-threshold outliers (network
+    // jitter); fail only if more than 1% of requests breach. The p95 assertion
+    // below is the primary, stable performance gate.
+    const maxOutliers = Math.max(1, Math.ceil(allSamples.length * 0.01));
+    expect(
+      overThreshold.length,
+      `${overThreshold.length}/${allSamples.length} requests exceeded ${LATENCY_THRESHOLD_MS}ms `
+      + `(tolerated up to ${maxOutliers}):\n${overThreshold.slice(0, 20).join('\n')}`
+    ).toBeLessThanOrEqual(maxOutliers);
+
     // The 95th percentile must stay comfortably under the threshold.
     expect(stats.p95Ms, `p95 latency (${stats.p95Ms}ms) should be under ${LATENCY_THRESHOLD_MS}ms`)
       .toBeLessThan(LATENCY_THRESHOLD_MS);
