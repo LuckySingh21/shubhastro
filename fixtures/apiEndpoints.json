@@ -1,0 +1,675 @@
+{
+  "generatedFrom": "fixtures/swagger-production.json",
+  "apiTitle": "shubAstro APIs",
+  "apiVersion": "1.0.5",
+  "basePath": "/api",
+  "excludedPatterns": [
+    "/email-test/",
+    "/callSessions/agoraToken",
+    "/users/agora/webhook",
+    "/socket-events"
+  ],
+  "count": 110,
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/addresses/",
+      "tag": "Addresses",
+      "summary": "Get all addresses for logged-in user"
+    },
+    {
+      "method": "GET",
+      "path": "/companion-suite/agentic-calendar/history",
+      "tag": "Agentic Calendar",
+      "summary": "Get analysis history"
+    },
+    {
+      "method": "GET",
+      "path": "/ai-history/",
+      "tag": "AI History",
+      "summary": "Get unified history of all AI features OR get details by historyId"
+    },
+    {
+      "method": "GET",
+      "path": "/ai-history/stats",
+      "tag": "AI History",
+      "summary": "Get usage statistics by feature type"
+    },
+    {
+      "method": "GET",
+      "path": "/astrologers/attendance/calendar",
+      "tag": "Astrologer - Attendance",
+      "summary": "Attendance calendar (month view)"
+    },
+    {
+      "method": "GET",
+      "path": "/astrologer/agreement-url/",
+      "tag": "Astrologer Agreement",
+      "summary": "Get or generate astrologer agreement PDF URL"
+    },
+    {
+      "method": "GET",
+      "path": "/astrologer-bank/bank-accounts",
+      "tag": "Astrologer Bank Accounts",
+      "summary": "Get all bank accounts for astrologer"
+    },
+    {
+      "method": "GET",
+      "path": "/astrologers/filter",
+      "tag": "Astrologers",
+      "summary": "Filter astrologers by specialties"
+    },
+    {
+      "method": "GET",
+      "path": "/astrologers/filterAstrologers",
+      "tag": "Astrologers",
+      "summary": "Filter astrologers with advanced filters"
+    },
+    {
+      "method": "GET",
+      "path": "/astrologers/monthly-overview",
+      "tag": "Astrologers",
+      "summary": "Get overview with date filters"
+    },
+    {
+      "method": "GET",
+      "path": "/astrologers/recommendation",
+      "tag": "Astrologers",
+      "summary": "Get astrologer recommendations"
+    },
+    {
+      "method": "GET",
+      "path": "/astrologers/withdrawRequest",
+      "tag": "Astrologers",
+      "summary": "Get withdrawal requests"
+    },
+    {
+      "method": "GET",
+      "path": "/mall/cart",
+      "tag": "AstroMall",
+      "summary": "Get user cart"
+    },
+    {
+      "method": "GET",
+      "path": "/mall/coupons",
+      "tag": "AstroMall",
+      "summary": "Get available coupons"
+    },
+    {
+      "method": "GET",
+      "path": "/mall/homepage",
+      "tag": "AstroMall",
+      "summary": "Get dynamic mall page with list items and products"
+    },
+    {
+      "method": "GET",
+      "path": "/mall/orders",
+      "tag": "AstroMall",
+      "summary": "Get user orders"
+    },
+    {
+      "method": "GET",
+      "path": "/mall/orders/history",
+      "tag": "AstroMall",
+      "summary": "Get user purchase history"
+    },
+    {
+      "method": "GET",
+      "path": "/mall/product-categories",
+      "tag": "AstroMall",
+      "summary": "Get all product categories"
+    },
+    {
+      "method": "GET",
+      "path": "/mall/products",
+      "tag": "AstroMall",
+      "summary": "Get all products with filters"
+    },
+    {
+      "method": "GET",
+      "path": "/mall/shipping/config",
+      "tag": "AstroMall",
+      "summary": "Get shipping configuration"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/attendance/overview",
+      "tag": "Attendance - Admin",
+      "summary": "Attendance overview (all astrologers)"
+    },
+    {
+      "method": "GET",
+      "path": "/block/check",
+      "tag": "Block",
+      "summary": "Check if a user/astrologer is blocked (either direction)"
+    },
+    {
+      "method": "GET",
+      "path": "/block/list",
+      "tag": "Block",
+      "summary": "Get all blocked users/astrologers"
+    },
+    {
+      "method": "GET",
+      "path": "/blogs/all",
+      "tag": "Blogs",
+      "summary": "Get all blogs, optionally filtered by category slug"
+    },
+    {
+      "method": "GET",
+      "path": "/blogs/categories",
+      "tag": "Blogs",
+      "summary": "Get the blog category list for the sidebar / filter"
+    },
+    {
+      "method": "GET",
+      "path": "/callSessions/activeSessions",
+      "tag": "Calls",
+      "summary": "Get active/pending sessions"
+    },
+    {
+      "method": "GET",
+      "path": "/callSessions/callHistory",
+      "tag": "Calls",
+      "summary": "Get call history"
+    },
+    {
+      "method": "GET",
+      "path": "/categories/all",
+      "tag": "Categories",
+      "summary": "Get all categories"
+    },
+    {
+      "method": "GET",
+      "path": "/chat/messages",
+      "tag": "Chat",
+      "summary": "Get chat messages"
+    },
+    {
+      "method": "GET",
+      "path": "/chat/messages/all",
+      "tag": "Chat",
+      "summary": "Get chat history"
+    },
+    {
+      "method": "GET",
+      "path": "/community/spaces",
+      "tag": "Community Spaces",
+      "summary": "List community spaces"
+    },
+    {
+      "method": "GET",
+      "path": "/community/spaces/me/joined",
+      "tag": "Community Spaces",
+      "summary": "Get my joined spaces"
+    },
+    {
+      "method": "GET",
+      "path": "/community/feed",
+      "tag": "Community",
+      "summary": "Get community feed"
+    },
+    {
+      "method": "GET",
+      "path": "/community/library",
+      "tag": "Community",
+      "summary": "My Library — personal activity tabs"
+    },
+    {
+      "method": "GET",
+      "path": "/companion-suite/dream-interpreter/history",
+      "tag": "Companion Suite - Dream Interpreter",
+      "summary": "Get dream history"
+    },
+    {
+      "method": "GET",
+      "path": "/companion-suite/daily-horoscope/all/today",
+      "tag": "Daily Horoscope",
+      "summary": "Get all today horoscopes"
+    },
+    {
+      "method": "GET",
+      "path": "/companion-suite/daily-horoscope/user/history",
+      "tag": "Daily Horoscope",
+      "summary": "Get user horoscope history"
+    },
+    {
+      "method": "GET",
+      "path": "/companion-suite/daily-horoscope/zodiac-signs",
+      "tag": "Daily Horoscope",
+      "summary": "Get all zodiac signs"
+    },
+    {
+      "method": "GET",
+      "path": "/ePoojas/all",
+      "tag": "E-Pooja",
+      "summary": "Get all e-poojas"
+    },
+    {
+      "method": "GET",
+      "path": "/ePoojas/single",
+      "tag": "E-Pooja",
+      "summary": "Get single e-pooja"
+    },
+    {
+      "method": "GET",
+      "path": "/wow-suite/face-analysis/history",
+      "tag": "Face Analysis",
+      "summary": "Get analysis history"
+    },
+    {
+      "method": "GET",
+      "path": "/feedback/all",
+      "tag": "Feedback - Admin",
+      "summary": "Get all feedbacks (Admin)"
+    },
+    {
+      "method": "GET",
+      "path": "/feedback/my-feedbacks",
+      "tag": "Feedback",
+      "summary": "Get my feedbacks"
+    },
+    {
+      "method": "GET",
+      "path": "/follows/followers",
+      "tag": "Follows",
+      "summary": "Get followers for astrologer"
+    },
+    {
+      "method": "GET",
+      "path": "/follows/following",
+      "tag": "Follows",
+      "summary": "Get following list for user"
+    },
+    {
+      "method": "GET",
+      "path": "/wow-suite/gemstone-scanner/history",
+      "tag": "Gemstone Scanner",
+      "summary": "Get analysis history"
+    },
+    {
+      "method": "GET",
+      "path": "/gifts/all",
+      "tag": "Gifts",
+      "summary": "Get all gifts with pagination"
+    },
+    {
+      "method": "GET",
+      "path": "/homepage/",
+      "tag": "Homepage",
+      "summary": "Get homepage data"
+    },
+    {
+      "method": "GET",
+      "path": "/action-suite/karmic-debt/history",
+      "tag": "Karmic Debt",
+      "summary": "Get karmic debt history"
+    },
+    {
+      "method": "GET",
+      "path": "/companion-suite/kundli-chat/kundli-details",
+      "tag": "Kundli Chat",
+      "summary": "Get kundli details"
+    },
+    {
+      "method": "GET",
+      "path": "/companion-suite/kundli-chat/kundlis",
+      "tag": "Kundli Chat",
+      "summary": "Get all kundlis"
+    },
+    {
+      "method": "GET",
+      "path": "/companion-suite/kundli-chat/popular-questions",
+      "tag": "Kundli Chat",
+      "summary": "Get popular questions"
+    },
+    {
+      "method": "GET",
+      "path": "/companion-suite/kundli-chat/sessions",
+      "tag": "Kundli Chat",
+      "summary": "Get all sessions"
+    },
+    {
+      "method": "GET",
+      "path": "/kundlis/all",
+      "tag": "Kundli",
+      "summary": "Get all kundlis"
+    },
+    {
+      "method": "GET",
+      "path": "/lal-kitab/history",
+      "tag": "Lal Kitab",
+      "summary": "Get Lal Kitab Teva history"
+    },
+    {
+      "method": "GET",
+      "path": "/live-chat/active-rooms",
+      "tag": "Live Chat",
+      "summary": "Get active live chat rooms"
+    },
+    {
+      "method": "GET",
+      "path": "/liveDarshan/temple-list",
+      "tag": "Live Darshan",
+      "summary": "Get live darshan list"
+    },
+    {
+      "method": "GET",
+      "path": "/users/live-users",
+      "tag": "Live Users",
+      "summary": "Get live users"
+    },
+    {
+      "method": "GET",
+      "path": "/news/listing",
+      "tag": "News",
+      "summary": "Get news listing"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/notifications/push-logs",
+      "tag": "Notifications - Admin",
+      "summary": "Push notification delivery logs"
+    },
+    {
+      "method": "GET",
+      "path": "/plans/all",
+      "tag": "Plans",
+      "summary": "Get all plans"
+    },
+    {
+      "method": "GET",
+      "path": "/report/reasons",
+      "tag": "Report",
+      "summary": "Get all report reasons"
+    },
+    {
+      "method": "GET",
+      "path": "/sessions/getAllUserSessions",
+      "tag": "Sessions",
+      "summary": "Get all sessions (call and chat) for user"
+    },
+    {
+      "method": "GET",
+      "path": "/static-pages/list",
+      "tag": "Static Pages",
+      "summary": "List all static pages (slug + title, no body)"
+    },
+    {
+      "method": "GET",
+      "path": "/subscriptions/all",
+      "tag": "Subscriptions",
+      "summary": "Get all subscriptions"
+    },
+    {
+      "method": "GET",
+      "path": "/support/tickets",
+      "tag": "Support - Admin",
+      "summary": "Get all tickets (Admin)"
+    },
+    {
+      "method": "GET",
+      "path": "/support/entities/astrologers",
+      "tag": "Support - Entity Lists",
+      "summary": "Get astrologers for report"
+    },
+    {
+      "method": "GET",
+      "path": "/support/entities/customers",
+      "tag": "Support - Entity Lists",
+      "summary": "Get customers for report"
+    },
+    {
+      "method": "GET",
+      "path": "/support/entities/orders",
+      "tag": "Support - Entity Lists",
+      "summary": "Get my orders"
+    },
+    {
+      "method": "GET",
+      "path": "/support/entities/sessions",
+      "tag": "Support - Entity Lists",
+      "summary": "Get my sessions"
+    },
+    {
+      "method": "GET",
+      "path": "/support/faq/categories",
+      "tag": "Support - FAQ",
+      "summary": "Get FAQ categories"
+    },
+    {
+      "method": "GET",
+      "path": "/support/tickets/my",
+      "tag": "Support - Tickets",
+      "summary": "Get my tickets"
+    },
+    {
+      "method": "GET",
+      "path": "/support/topics",
+      "tag": "Support",
+      "summary": "Get main support topics"
+    },
+    {
+      "method": "GET",
+      "path": "/tips/listing",
+      "tag": "Tips & Growth",
+      "summary": "Get all tips with pagination and filters"
+    },
+    {
+      "method": "GET",
+      "path": "/transactions/all",
+      "tag": "Transactions",
+      "summary": "Get all transactions for user"
+    },
+    {
+      "method": "GET",
+      "path": "/transactions/allAstroTransactions",
+      "tag": "Transactions",
+      "summary": "Get all transactions for astrologer"
+    },
+    {
+      "method": "GET",
+      "path": "/transactions/getTotalEarning",
+      "tag": "Transactions",
+      "summary": "Get total earning for astrologer"
+    },
+    {
+      "method": "GET",
+      "path": "/transactions/invoice",
+      "tag": "Transactions",
+      "summary": "Generate invoice PDF or transaction statement (User & Astrologer)"
+    },
+    {
+      "method": "GET",
+      "path": "/astrologers/recentActivites",
+      "tag": "Untagged",
+      "summary": ""
+    },
+    {
+      "method": "GET",
+      "path": "/chat/messages/inbox",
+      "tag": "Untagged",
+      "summary": ""
+    },
+    {
+      "method": "GET",
+      "path": "/ePoojas/poojaris",
+      "tag": "Untagged",
+      "summary": ""
+    },
+    {
+      "method": "GET",
+      "path": "/homepage/v2-app",
+      "tag": "Untagged",
+      "summary": ""
+    },
+    {
+      "method": "GET",
+      "path": "/milestone/getAllMilestones",
+      "tag": "Untagged",
+      "summary": ""
+    },
+    {
+      "method": "GET",
+      "path": "/Profile/",
+      "tag": "Untagged",
+      "summary": ""
+    },
+    {
+      "method": "GET",
+      "path": "/subscription-entitlements/admin/audit-logs",
+      "tag": "Untagged",
+      "summary": ""
+    },
+    {
+      "method": "GET",
+      "path": "/subscription-entitlements/admin/features",
+      "tag": "Untagged",
+      "summary": ""
+    },
+    {
+      "method": "GET",
+      "path": "/subscription-entitlements/admin/plans",
+      "tag": "Untagged",
+      "summary": ""
+    },
+    {
+      "method": "GET",
+      "path": "/subscription-entitlements/features",
+      "tag": "Untagged",
+      "summary": ""
+    },
+    {
+      "method": "GET",
+      "path": "/subscription-entitlements/plans",
+      "tag": "Untagged",
+      "summary": ""
+    },
+    {
+      "method": "GET",
+      "path": "/subscription-entitlements/status",
+      "tag": "Untagged",
+      "summary": ""
+    },
+    {
+      "method": "GET",
+      "path": "/wallets/preSessionBalanceCheck",
+      "tag": "Untagged",
+      "summary": ""
+    },
+    {
+      "method": "GET",
+      "path": "/users/active-sessions",
+      "tag": "Users",
+      "summary": "Get active device sessions"
+    },
+    {
+      "method": "GET",
+      "path": "/users/all",
+      "tag": "Users",
+      "summary": "Get all users"
+    },
+    {
+      "method": "GET",
+      "path": "/users/profile",
+      "tag": "Users",
+      "summary": "Get user profile"
+    },
+    {
+      "method": "GET",
+      "path": "/wallets/all",
+      "tag": "Wallets",
+      "summary": "Get wallet balance"
+    },
+    {
+      "method": "GET",
+      "path": "/action-suite/wearable/alerts",
+      "tag": "Wearable Integration",
+      "summary": "History of wearable alerts sent to this user"
+    },
+    {
+      "method": "GET",
+      "path": "/action-suite/wearable/consent",
+      "tag": "Wearable Integration",
+      "summary": "Get consent state per provider"
+    },
+    {
+      "method": "GET",
+      "path": "/action-suite/wearable/providers",
+      "tag": "Wearable Integration",
+      "summary": "List supported providers + this user\\'s connection status"
+    },
+    {
+      "method": "GET",
+      "path": "/action-suite/wearable/readings",
+      "tag": "Wearable Integration",
+      "summary": "Query normalized readings"
+    },
+    {
+      "method": "GET",
+      "path": "/action-suite/wearable/reports",
+      "tag": "Wearable Integration",
+      "summary": "List the user\\'s daily Astro-Health reports"
+    },
+    {
+      "method": "GET",
+      "path": "/action-suite/wearable/summary",
+      "tag": "Wearable Integration",
+      "summary": "Get last-24h dashboard summary"
+    },
+    {
+      "method": "GET",
+      "path": "/wow-suite/palmistry/history",
+      "tag": "WOW Suite - AI Palmistry",
+      "summary": "Get palm reading history"
+    },
+    {
+      "method": "GET",
+      "path": "/wow-suite/aura/colors",
+      "tag": "WOW Suite - Aura Photography",
+      "summary": "Get aura colors and meanings"
+    },
+    {
+      "method": "GET",
+      "path": "/wow-suite/aura/history",
+      "tag": "WOW Suite - Aura Photography",
+      "summary": "Get aura history"
+    },
+    {
+      "method": "GET",
+      "path": "/wow-suite/business-pathfinder/history",
+      "tag": "WOW Suite - Business Pathfinder",
+      "summary": "Get Business Pathfinder history"
+    },
+    {
+      "method": "GET",
+      "path": "/wow-suite/business-pathfinder/options",
+      "tag": "WOW Suite - Business Pathfinder",
+      "summary": "Get Business Pathfinder chip options"
+    },
+    {
+      "method": "GET",
+      "path": "/wow-suite/clothes-color/history",
+      "tag": "WOW Suite - Clothes Color Analysis",
+      "summary": "Get color analysis history"
+    },
+    {
+      "method": "GET",
+      "path": "/wow-suite/signature/history",
+      "tag": "WOW Suite - Signature Analysis",
+      "summary": "Get signature analysis history"
+    },
+    {
+      "method": "GET",
+      "path": "/wow-suite/vastu/scan-history",
+      "tag": "WOW Suite - Vastu Scanner",
+      "summary": "Get scan history for user"
+    },
+    {
+      "method": "GET",
+      "path": "/wow-suite/vastu/user-rooms",
+      "tag": "WOW Suite - Vastu Scanner",
+      "summary": "Get all rooms for current user"
+    }
+  ]
+}

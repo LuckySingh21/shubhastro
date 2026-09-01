@@ -11,6 +11,9 @@
     "test:debug": "npx playwright test --debug",
     "test:geo": "npx rimraf test-results/geo-new-vs-current-report.jsonl && npx playwright test geo- --project=chromium && node utils/geoReport.js",
     "geo:report": "node utils/geoReport.js",
+    "test:api": "npx rimraf test-results/api-response-time.jsonl && npx playwright test api-response-time --project=chromium && node utils/apiReport.js",
+    "api:report": "node utils/apiReport.js",
+    "api:endpoints": "node utils/generateApiEndpoints.js",
     "report": "npx allure serve allure-results",
     "report:generate": "npx allure generate allure-results --clean -o allure-report",
     "clean:results": "npx rimraf allure-results allure-report"
